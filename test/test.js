@@ -1,18 +1,40 @@
 var assert = require('power-assert');
 
-describe('Array', function(){
-    beforeEach(function(){
-        this.ary = [1,2,3];
-    });
-    describe('#indexOf()', function(){
-        it('should return index when the value is present', function(){
-            var zero = 0, two = 2;
-            assert(this.ary.indexOf(zero) === two);
-        });
-        it('should return -1 when the value is not present', function(){
-            var minusOne = -1, two = 2;
-            assert.ok(this.ary.indexOf(two) === minusOne, 'THIS IS AN ASSERTION MESSAGE');
+var mainLogic = {
+    num: 0,
+    fizz: function(num) {
+        return (num % 3 === 0) ? 'fizz ' : '';
+    },
+    buzz: function(num) {
+        return (num % 5 === 0) ? 'buzz' : '';
+    },
+    others: function(num) {
+        return (this.fizz(num) + this.buzz(num) === '') ? num : '';
+    },
+    run: function() {
+        var num = this.num = (this.num + 1);
+        return (this.fizz(num) + this.buzz(num) + this.others(num)).trim();
+    }
+};
+
+describe('fizz buzz test!!', function(){
+    describe('fizzbuzz用のロジックが実行された時', function(){
+        it('各種結果は、下記のようになる。', function(){
+            assert(mainLogic.run() === '1');
+            assert(mainLogic.run() === '2');
+            assert(mainLogic.run() === 'fizz');
+            assert(mainLogic.run() === '4');
+            assert(mainLogic.run() === 'buzz');
+            assert(mainLogic.run() === 'fizz');
+            assert(mainLogic.run() === '7');
+            assert(mainLogic.run() === '8');
+            assert(mainLogic.run() === 'fizz');
+            assert(mainLogic.run() === 'buzz');
+            assert(mainLogic.run() === '11');
+            assert(mainLogic.run() === 'fizz');
+            assert(mainLogic.run() === '13');
+            assert(mainLogic.run() === '14');
+            assert(mainLogic.run() === 'fizz buzz');
         });
     });
 });
-
